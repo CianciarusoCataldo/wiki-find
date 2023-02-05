@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,8 +51,8 @@ fun HeaderPane(state: WikiFindUiState, modifier: Modifier = Modifier) {
             verticalAlignment = CenterVertically
         ) {
             OutlinedTextField(
+                maxLines = 1,
                 trailingIcon = {
-
                     TextButton(
                         modifier = Modifier.background(Color.Transparent),
                         onClick = { wikiFindModel.getWiki(text) }) {
@@ -74,9 +75,10 @@ fun HeaderPane(state: WikiFindUiState, modifier: Modifier = Modifier) {
                 },
                 value = text,
                 onValueChange = {
+                    Log.i("INPUT", it)
                     text = it
                 },
-                placeholder = { Text("Insert a Wikipedia page title") },
+                placeholder = { Text(stringResource(R.string.header_input_placeholder)) },
                 singleLine = true,
                 modifier = Modifier
                     .weight(2f)
@@ -91,7 +93,6 @@ fun HeaderPane(state: WikiFindUiState, modifier: Modifier = Modifier) {
                     unfocusedIndicatorColor = Color.Transparent
                 ),
                 keyboardActions = KeyboardActions(onDone = {
-                    Log.i("INFO", text.replace(" ", "_"))
                     wikiFindModel.getWiki(text)
                     focusManager.clearFocus()
                 }) {},

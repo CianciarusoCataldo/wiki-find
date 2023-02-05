@@ -2,6 +2,8 @@ package com.wikifind.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import com.wikifind.R
 import androidx.compose.material3.Text
@@ -12,6 +14,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,10 +24,31 @@ import com.wikifind.model.WikiFindViewModel
 
 @Composable
 fun BodyPanel(state: WikiFindUiState, modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(10.dp)
+    ) {
 
 
         when (state) {
+            is WikiFindUiState.Empty -> {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(0.dp, 50.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        alpha = 0.3f,
+                        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                        contentDescription = "Empty screen logo",
+                    )
+                }
+
+            }
             is WikiFindUiState.Success -> {
                 TitleLabel(title = state.response.query.pages[0].title)
                 Text(state.response.query.pages[0].extract)
@@ -75,11 +99,13 @@ fun ErrorScreen(state: WikiFindUiState, modifier: Modifier = Modifier) {
                 contentDescription = "error icon"
             )
             TitleLabel(
-                title = "Error", color = Color.Red, modifier = Modifier.padding(10.dp, 0.dp)
+                title = stringResource(R.string.error_title),
+                color = Color.Red,
+                modifier = Modifier.padding(10.dp, 0.dp)
             )
         }
         Text(
-            text = "Error during search. Re-try search with a valid Wikipedia page title.",
+            text = stringResource(R.string.error_body),
             fontWeight = FontWeight.Medium,
             fontSize = 20.sp,
             modifier = Modifier.padding(10.dp, 0.dp)

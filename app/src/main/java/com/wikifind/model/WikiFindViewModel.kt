@@ -16,20 +16,23 @@ sealed interface WikiFindUiState {
     data class Success(val response: WikiResponse) : WikiFindUiState
     data class Error(val error: String) : WikiFindUiState
     object Loading : WikiFindUiState
+
+    object Empty : WikiFindUiState
 }
 
 class WikiFindViewModel : ViewModel() {
-    var wikiFindUiState: WikiFindUiState by mutableStateOf(WikiFindUiState.Loading)
+    var wikiFindUiState: WikiFindUiState by mutableStateOf(WikiFindUiState.Empty)
         private set
 
     init {
-        getWiki("wikipedia")
     }
 
     fun getWiki(page: String) {
 
         if (page.isNotEmpty()) {
+
             viewModelScope.launch {
+                wikiFindUiState = WikiFindUiState.Loading
                 wikiFindUiState = try {
                     val response = WikiFindNetworkApi.retrofitService.getWikiData(page)
                     // Log.i("INFO", response.toString())

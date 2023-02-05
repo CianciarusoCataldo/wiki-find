@@ -18,11 +18,8 @@ import com.wikifind.model.WikiFindViewModel
 import com.wikifind.ui.components.BodyPanel
 import com.wikifind.ui.components.FooterPanel
 import com.wikifind.ui.components.HeaderPane
-import com.wikifind.ui.theme.WikiFindTheme
-
 
 class MainActivity : ComponentActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +39,6 @@ class MainActivity : ComponentActivity() {
                             state = wikiFindModel.wikiFindUiState,
                             modifier = Modifier
                                 .weight(3f, true)
-                                .fillMaxWidth()
-                                .verticalScroll(rememberScrollState())
-                                .padding(10.dp)
                         )
                         FooterPanel(
                             state = wikiFindModel.wikiFindUiState,

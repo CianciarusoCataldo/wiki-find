@@ -4,4 +4,8 @@
     <string name="send">Send to</string>
     <string name="toast_copy_success">Copied !</string>
     <string name="copy">Copy</string>
+    <string name="error_body">Error during search. Re-try search with a valid Wikipedia page title.</string>
+    <string name="error_title">Error</string>
+    <string name="header_input_placeholder">Search a Wikipedia page..</string>
+    <string name="view_page">Open page</string>
 </resources>
