@@ -29,9 +29,9 @@ class WikiFindViewModel : ViewModel() {
 
     fun getWiki(page: String) {
 
-        if (page.isNotEmpty()) {
 
-            viewModelScope.launch {
+        viewModelScope.launch {
+            if (page.isNotEmpty()) {
                 wikiFindUiState = WikiFindUiState.Loading
                 wikiFindUiState = try {
                     val response = WikiFindNetworkApi.retrofitService.getWikiData(page)
@@ -40,7 +40,10 @@ class WikiFindViewModel : ViewModel() {
                 } catch (e: Exception) {
                     WikiFindUiState.Error(e.toString())
                 }
+            } else {
+                wikiFindUiState = WikiFindUiState.Empty
             }
         }
+
     }
 }
