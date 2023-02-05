@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import com.wikifind.R
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.wikifind.R
 import com.wikifind.model.WikiFindUiState
 import com.wikifind.model.WikiFindViewModel
 
@@ -73,7 +73,7 @@ fun BodyPanel(state: WikiFindUiState, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TitleLabel(title: String, color: Color = Color.Black, modifier: Modifier = Modifier) {
+fun TitleLabel(title: String, color: Color = Color.Unspecified, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()

@@ -6,25 +6,22 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.wikifind.model.WikiFindViewModel
 import com.wikifind.ui.components.BodyPanel
 import com.wikifind.ui.components.FooterPanel
 import com.wikifind.ui.components.HeaderPane
+import com.wikifind.ui.theme.WikiFindTheme
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
+            WikiFindTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
@@ -37,8 +34,7 @@ class MainActivity : ComponentActivity() {
                         )
                         BodyPanel(
                             state = wikiFindModel.wikiFindUiState,
-                            modifier = Modifier
-                                .weight(3f, true)
+                            modifier = Modifier.weight(3f, true)
                         )
                         FooterPanel(
                             state = wikiFindModel.wikiFindUiState,
