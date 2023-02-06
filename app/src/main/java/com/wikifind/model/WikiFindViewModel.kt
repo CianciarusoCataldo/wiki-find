@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wikifind.network.URL_TEMPLATE
 import com.wikifind.network.WikiFindNetworkApi
 import kotlinx.coroutines.launch
 
@@ -15,7 +16,6 @@ sealed interface WikiFindUiState {
     data class Success(val response: WikiResponse) : WikiFindUiState
     data class Error(val error: String) : WikiFindUiState
     object Loading : WikiFindUiState
-
     object Empty : WikiFindUiState
 }
 
@@ -23,18 +23,16 @@ class WikiFindViewModel : ViewModel() {
     var wikiFindUiState: WikiFindUiState by mutableStateOf(WikiFindUiState.Empty)
         private set
 
-    init {
-    }
+    init {}
 
-    fun getWiki(page: String) {
-
-
+    fun getWiki(page: String, lang: String = "it") {
         viewModelScope.launch {
             if (page.isNotEmpty()) {
                 wikiFindUiState = WikiFindUiState.Loading
                 wikiFindUiState = try {
-                    val response = WikiFindNetworkApi.retrofitService.getWikiData(page)
-                    // Log.i("INFO", response.toString())
+                    val response = WikiFindNetworkApi.retrofitService.getWikiData(
+                        title = page, url = URL_TEMPLATE.replace("<<LANG>>", lang)
+                    )
                     WikiFindUiState.Success(response)
                 } catch (e: Exception) {
                     WikiFindUiState.Error(e.toString())
@@ -43,6 +41,7 @@ class WikiFindViewModel : ViewModel() {
                 wikiFindUiState = WikiFindUiState.Empty
             }
         }
-
     }
+
+
 }

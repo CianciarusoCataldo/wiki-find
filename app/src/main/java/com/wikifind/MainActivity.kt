@@ -13,24 +13,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.wikifind.model.WikiFindViewModel
 import com.wikifind.ui.components.BodyPanel
 import com.wikifind.ui.components.FooterPanel
-import com.wikifind.ui.components.HeaderPane
+import com.wikifind.ui.components.HeaderPanel
 import com.wikifind.ui.theme.WikiFindTheme
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPref = this.getSharedPreferences("config", MODE_PRIVATE) ?: return
+
         setContent {
             WikiFindTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     val wikiFindModel: WikiFindViewModel = viewModel()
-
                     Column() {
-                        HeaderPane(
+                        HeaderPanel(
                             state = wikiFindModel.wikiFindUiState,
-                            modifier = Modifier.weight(0.7f, true)
+                            modifier = Modifier.weight(1.0f, true),
+                            onLanguageChange = {
+                                with(sharedPref.edit()) {
+                                    putString("lang", it)
+                                    apply()
+                                }
+
+                            }, languageSet = sharedPref.getString("lang", null).toString()
                         )
                         BodyPanel(
                             state = wikiFindModel.wikiFindUiState,

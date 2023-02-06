@@ -32,4 +32,4 @@ data class QueryField(
 }
 
 
-data class Page(val title: String, val extract: String)
+data class Page(val title: String, val extract: String? = null, val missing: Boolean?)

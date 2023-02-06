@@ -3,6 +3,7 @@ package com.wikifind.ui.components
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -54,72 +55,67 @@ fun FooterPanel(state: WikiFindUiState, modifier: Modifier = Modifier) {
 
         when (state) {
             is WikiFindUiState.Success -> {
-                ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(10.dp, 0.dp),
+                FooterButton(
+                    imageId = R.drawable.copy_icon,
+                    contentDescription = "copy icon",
                     onClick = {
-                    clipboardManager.setText(AnnotatedString((toShow)))
-                    Toast.makeText(context, copyToastText, Toast.LENGTH_SHORT).show()
-                }) {
-                    Row(
-                        verticalAlignment = CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = Modifier.size(20.dp),
-                            painter = painterResource(id = R.drawable.copy_icon),
-                            contentDescription = "copy icon"
-                        )
-                    }
-                }
+                        if (toShow != null) {
+                            clipboardManager.setText(AnnotatedString((toShow)))
+                            Toast.makeText(context, copyToastText, Toast.LENGTH_SHORT).show()
+                        }
+                    })
 
-                ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(10.dp, 0.dp),
+                FooterButton(
+                    imageId = R.drawable.share_icon,
+                    contentDescription = "share icon",
                     onClick = {
-                    clipboardManager.setText(AnnotatedString((toShow)))
-                    val shareIntent = Intent()
-                    shareIntent.action = Intent.ACTION_SEND
-                    shareIntent.type = "text/plain"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, toShow)
-                    ContextCompat.startActivity(
-                        context, Intent.createChooser(shareIntent, sendText), null
-                    )
-                }) {
-                    Row(
-                        verticalAlignment = CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = Modifier.size(20.dp),
-                            painter = painterResource(id = R.drawable.share_icon),
-                            contentDescription = "share icon"
-                        )
-                    }
-                }
+                        if (toShow != null) {
+                            clipboardManager.setText(AnnotatedString((toShow)))
+                            val shareIntent = Intent()
+                            shareIntent.action = Intent.ACTION_SEND
+                            shareIntent.type = "text/plain"
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, toShow)
+                            ContextCompat.startActivity(
+                                context, Intent.createChooser(shareIntent, sendText), null
+                            )
+                        }
+                    })
 
-                ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(10.dp, 0.dp),
+                FooterButton(imageId = R.drawable.open_link_icon,
+                    contentDescription = "open link icon",
                     onClick = {
-                    clipboardManager.setText(AnnotatedString((toShow)))
-                    val openURL = Intent(Intent.ACTION_VIEW)
-                    openURL.data =
-                        Uri.parse("https://it.wikipedia.org/wiki/" + state.response.query.pages[0].title)
-                    ContextCompat.startActivity(
-                        context, openURL, null
-                    )
-                }) {
-                    Row(
-                        verticalAlignment = CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = Modifier.size(20.dp),
-                            painter = painterResource(id = R.drawable.open_link_icon),
-                            contentDescription = "open link icon"
-                        )
-                    }
-                }
+                        if (toShow != null) {
+                            clipboardManager.setText(AnnotatedString((toShow)))
+                            val openURL = Intent(Intent.ACTION_VIEW)
+                            openURL.data =
+                                Uri.parse("https://it.wikipedia.org/wiki/" + state.response.query.pages[0].title)
+                            ContextCompat.startActivity(
+                                context, openURL, null
+                            )
+                        }
+                    })
             }
             else -> {}
+        }
+    }
+}
+
+@Composable
+fun FooterButton(
+    onClick: () -> Unit = {}, @DrawableRes imageId: Int, contentDescription: String = "icon"
+) {
+    ExtendedFloatingActionButton(modifier = Modifier.padding(10.dp, 0.dp), onClick = {
+        onClick()
+    }) {
+        Row(
+            verticalAlignment = CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Image(
+                modifier = Modifier.size(20.dp),
+                painter = painterResource(id = imageId),
+                contentDescription = contentDescription
+            )
         }
     }
 }
