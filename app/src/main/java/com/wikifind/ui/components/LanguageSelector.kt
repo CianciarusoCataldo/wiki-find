@@ -2,8 +2,8 @@ package com.wikifind.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import com.wikifind.R
 
 val supportedLanguages = listOf("it", "en", "es", "de")
@@ -38,12 +39,12 @@ fun LanguageSelector(
     ) {
         TextButton(modifier = Modifier.padding(5.dp, 0.dp), onClick = { expanded = !expanded }) {
             Image(
-                modifier = Modifier.size(60.dp),
+                modifier = Modifier.heightIn(min = 60.dp, max = 80.dp),
                 painter = painterResource(id = imgId),
                 contentDescription = "api icon"
             )
         }
-        Text(text = language, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+        Text(text = language, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },

@@ -1,4 +1,4 @@
-package com.wikifind.ui.components
+package com.wikifind.ui.containers
 
 import android.content.Intent
 import android.net.Uri
@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+
 import com.wikifind.R
 import com.wikifind.model.WikiFindUiState
 
@@ -112,7 +113,7 @@ fun FooterButton(
             horizontalArrangement = Arrangement.Center,
         ) {
             Image(
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(25.dp),
                 painter = painterResource(id = imageId),
                 contentDescription = contentDescription
             )

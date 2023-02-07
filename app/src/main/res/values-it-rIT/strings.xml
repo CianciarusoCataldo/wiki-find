@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send">Invia a</string>
+    <string name="toast_copy_success">Copiato !</string>
+    <string name="error_title">Errore</string>
+    <string name="error_body">Errre durante la ricerca. Riprova la ricerca fra qualche minuto.</string>
+    <string name="notFound_header">Pagina non trovata</string>
+    <string name="notFound_body">La pagina PAGE_TO_SEARCH non è stata trovata in Wikipedia.</string>
+    <string name="notFound_tryAgain">Riprova la ricerca con un titolo di una pagina di Wikipedia corretto.</string>
+    <string name="header_input_placeholder">Cerca su Wikipedia..</string>
+    <string name="loading_body">Ricerca della pagina su Wikipedia...</string>
+</resources>

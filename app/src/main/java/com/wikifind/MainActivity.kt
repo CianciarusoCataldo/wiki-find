@@ -10,10 +10,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import com.wikifind.model.WikiFindViewModel
-import com.wikifind.ui.components.BodyPanel
-import com.wikifind.ui.components.FooterPanel
-import com.wikifind.ui.components.HeaderPanel
+import com.wikifind.ui.containers.BodyPanel
+import com.wikifind.ui.containers.FooterPanel
+import com.wikifind.ui.containers.HeaderPanel
 import com.wikifind.ui.theme.WikiFindTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,9 +32,7 @@ class MainActivity : ComponentActivity() {
                     val wikiFindModel: WikiFindViewModel = viewModel()
                     Column() {
                         HeaderPanel(
-                            state = wikiFindModel.wikiFindUiState,
-                            modifier = Modifier.weight(1.0f, true),
-                            onLanguageChange = {
+                            modifier = Modifier.weight(1.0f, true), onLanguageChange = {
                                 with(sharedPref.edit()) {
                                     putString("lang", it)
                                     apply()

@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">WikiFind</string>
+    <string name="app_name" translatable="false">WikiFind</string>
     <string name="send">Send to</string>
     <string name="toast_copy_success">Copied !</string>
     <string name="error_title">Error</string>
     <string name="error_body">Error during search. Re-try search after some minutes.</string>
-    <string name="notFound_header">Page not found.</string>
-    <string name="notFound_body">Page PAGE_TO_SEARCH not found on Wikipedia. Re-try search with a valid Wikipedia page title.</string>
-    <string name="header_input_placeholder">Search a Wikipedia page..</string>
-    <string name="loading_body">Searching page on wikipedia...</string>
+    <string name="notFound_header">Page not found</string>
+    <string name="notFound_body">Page PAGE_TO_SEARCH not found on Wikipedia.</string>
+    <string name="notFound_tryAgain">Re-try search with a valid Wikipedia page title.</string>
+    <string name="header_input_placeholder">Search on Wikipedia..</string>
+    <string name="loading_body">Searching the page on Wikipedia...</string>
 </resources>
